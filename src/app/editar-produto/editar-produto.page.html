@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/listar-dados"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Produto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form #form="ngForm" (ngSubmit)="salvar(form)">
+    <ion-item>
+      <ion-label position="floating">Nome do Produto</ion-label>
+      <ion-input name="nome" type="text" [(ngModel)] ="produto.nome" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Quantidade</ion-label>
+      <ion-input name="quantidade" type="text" [(ngModel)] ="produto.quantidade" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Valor</ion-label>
+      <ion-input name="valor" type="text" [(ngModel)] ="produto.valor" required></ion-input>
+    </ion-item>
+
+    <ion-button id="open-toast" type="submit" expand="block" [disabled]="!form.valid">
+      Salvar
+      <ion-toast trigger="open-toast" message="Produto atualizado com sucesso!" [duration]="5000"></ion-toast>
+    </ion-button>
+  </form>
+</ion-content>

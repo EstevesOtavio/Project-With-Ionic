@@ -1,20 +1,126 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-segment value="login" [(ngModel)]="segmentValue">
+      <ion-segment-button value="login">
+        <ion-label>Login</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="cadastrar">
+        <ion-label>Cadastre-se</ion-label>
+      </ion-segment-button>
+    </ion-segment>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div [ngSwitch]="segmentValue">
+    <!-- Tela Login -->
+    <ng-container *ngSwitchCase="'login'">
+      <ion-card>
+        <form #form="ngForm" (ngSubmit)="login(form)">
+          <ion-card-header>
+            <ion-card-title>Login</ion-card-title>
+          </ion-card-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+          <ion-card-content>
+            Preencha os campos abaixo para acessar sua conta
+          </ion-card-content>
+
+          <ion-item>
+            <ion-input
+              placeholder="Login"
+              name="email"
+              [(ngModel)]="user.email"
+              type="text"
+              required
+            ></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-input
+              placeholder="Senha"
+              name="senha"
+              [(ngModel)]="user.senha"
+              type="password"
+              required
+            ></ion-input>
+          </ion-item>
+
+          <ion-button
+            id="open-toast"
+            class="button-login"
+            type="submit"
+            expand="block"
+            [disabled]="!form.valid"
+          >
+            Login
+          </ion-button>
+        </form>
+      </ion-card>
+    </ng-container>
+
+    <!-- Tela Cadastrar -->
+    <ng-container *ngSwitchCase="'cadastrar'">
+      <ion-card>
+        <form #form="ngForm" (ngSubmit)="cadastrar(form)">
+          <ion-card-header>
+            <ion-card-title>Cadastre-se</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            Preencha os campos abaixo para se cadastrar
+          </ion-card-content>
+
+          <ion-item>
+            <ion-input
+              placeholder="Nome"
+              name="nome"
+              [(ngModel)]="user.nome"
+              type="text"
+              required
+            ></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-input
+              placeholder="Email"
+              name="email"
+              [(ngModel)]="user.email"
+              type="text"
+              required
+            ></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-input
+              placeholder="Senha"
+              name="senha"
+              [(ngModel)]="user.senha"
+              type="password"
+              required
+            ></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-input
+              placeholder="Confirmar Senha"
+              name="confirmar-senha"
+              [(ngModel)]="confirmarSenha"
+              type="password"
+              required
+            ></ion-input>
+          </ion-item>
+
+          <ion-button
+            expand="block"
+            class="button-login"
+            type="submit"
+            expand="block"
+            [disabled]="!form.valid"
+          >
+            Cadastrar-se
+          </ion-button>
+        </form>
+      </ion-card>
+    </ng-container>
   </div>
 </ion-content>
